@@ -96,7 +96,7 @@ const Detail = ({ detail, media_type, media_id }) => {
                 media_type: media_type,
                 media_id: media_id,
             })
-            const newReview = response.data
+            //const newReview = response.data
             setOpen(false)
             setReview('')
             setRating(0)
@@ -108,10 +108,8 @@ const Detail = ({ detail, media_type, media_id }) => {
         }
     }
     const handleReviewUpdate = async review => {
-        console.log(review.content)
         const currentReview = editReview || review.content
         const currentRating = editRating || review.rating
-        console.log(currentReview)
         try {
             const response = await laravelAxios.put(`api/review/${review.id}`, {
                 content: currentReview,
@@ -282,7 +280,10 @@ const Detail = ({ detail, media_type, media_id }) => {
                                         <Typography
                                             variant="h6"
                                             component={'div'}>
-                                            投稿日:{formatDateToJapanTime(review.created_at)}
+                                            投稿日:
+                                            {formatDateToJapanTime(
+                                                review.created_at,
+                                            )}
                                         </Typography>
                                         <Typography>
                                             <Typography
