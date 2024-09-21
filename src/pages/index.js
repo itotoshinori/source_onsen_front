@@ -4,6 +4,7 @@ import { useAuth } from '@/hooks/auth'
 
 export default function Home() {
     const { user } = useAuth({ middleware: 'guest' })
+    console.log('csrfToken:' + csrfToken) 
 
     return (
         <>
