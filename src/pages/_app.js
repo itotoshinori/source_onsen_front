@@ -7,6 +7,7 @@ const App = ({ Component, pageProps }) => {
         await fetchCsrfToken() // CSRFトークンを取得
         // 他の処理を続ける
     }
+    
     // 初回レンダリング時にCSRFトークンを取得
     useEffect(() => {
         init()
