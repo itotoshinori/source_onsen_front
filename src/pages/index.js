@@ -1,9 +1,28 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import { useAuth } from '@/hooks/auth'
+import { useEffect } from 'react'
+import axios from 'axios'
 
 export default function Home() {
     const { user } = useAuth({ middleware: 'guest' })
+
+    useEffect(() => {
+        const fetchCsrfToken = async () => {
+            try {
+                const response = await axios.get(
+                    `${process.env.NEXT_PUBLIC_BACKEND_URL}/csrf-token`,
+                    {
+                        withCredentials: true,
+                    },
+                )
+                console.log('CSRF Token:', response.data.csrf_token) // デバッグ用にログを残す
+            } catch (error) {
+                console.error('Error fetching CSRF token:', error)
+            }
+        }
+        fetchCsrfToken()
+    }, [])
 
     return (
         <>
