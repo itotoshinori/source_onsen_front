@@ -1,17 +1,19 @@
 import 'tailwindcss/tailwind.css'
-import { useEffect } from 'react'
-import { fetchCsrfToken, setCsrfToken } from './path/to/your/laravelAxios'
+import { fetchCsrfToken } from '../lib/laravelAxios'
+import { useEffect } from 'react';
 
 const App = ({ Component, pageProps }) => {
+    const init = async () => {
+        await fetchCsrfToken(); // CSRFトークンを取得
+        // 他の処理を続ける
+    }
+
+    // 初回レンダリング時にCSRFトークンを取得
     useEffect(() => {
-        const init = async () => {
-            await fetchCsrfToken() // CSRFトークンを取得
-            // CSRFトークンは自動で設定される
-        }
-        init()
-    }, [])
+        init();
+    }, []);
 
     return <Component {...pageProps} />
 }
 
-export default App
+export default App;

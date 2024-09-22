@@ -18,6 +18,7 @@ export const setCsrfToken = token => {
 
 export const fetchCsrfToken = async () => {
     await laravelAxios.get('/sanctum/csrf-cookie')
+    console.log(laravelAxios.get('/sanctum/csrf-cookie'))
     // CSRFトークンを取得するためにサーバーから取得したクッキーを使用
     return csrfToken // トークンを返す（空のままなので、この行は削除することも可能）
 }
