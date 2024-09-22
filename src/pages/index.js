@@ -1,11 +1,14 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import { useAuth } from '@/hooks/auth'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { setCsrfToken } from '@/lib/laravelAxios' // 追加
 
 export default function Home() {
     const { user } = useAuth({ middleware: 'guest' })
+     // eslint-disable-next-line no-unused-vars
+    const [csrfToken, setCsrfTokenState] = useState('')
 
     useEffect(() => {
         const fetchCsrfToken = async () => {
@@ -16,7 +19,9 @@ export default function Home() {
                         withCredentials: true,
                     },
                 )
-                console.log('CSRF Token:', response.data.csrf_token) // デバッグ用にログを残す
+                console.log('CSRF Token:', response.data.csrf_token)
+                setCsrfTokenState(response.data.csrf_token)
+                setCsrfToken(response.data.csrf_token) // 追加
             } catch (error) {
                 console.error('Error fetching CSRF token:', error)
             }
