@@ -7,7 +7,7 @@ import { setCsrfToken } from '@/lib/laravelAxios' // 追加
 
 export default function Home() {
     const { user } = useAuth({ middleware: 'guest' })
-     // eslint-disable-next-line no-unused-vars
+    // eslint-disable-next-line no-unused-vars
     const [csrfToken, setCsrfTokenState] = useState('')
 
     useEffect(() => {
